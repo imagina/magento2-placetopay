@@ -1,26 +1,33 @@
-# libPlaceToPay
-libreria placeToPay
-##uso 
-###Connect
-$auth = new ClsAuthentication(<AuthId>, <TranKey>, <Additional>|null);
-$auth->connect($auth, <url wdsl soap>);
+# Imagina Magento 2 PlacetpLatam Module
 
-###ClslibPlaceToPay
-instaciar clase ClslibPlaceToPay
-$placetopay = new ClslibPlaceToPay();
+*Read this in other languages: [Español](README.es.md),[English](README.md)
 
-###getBankList
-retorno lista de bancos
-$bancos=$placetopay->getBankList();
+PlacetpLatam integration for Magento 2
 
-###TransactionRequest
-Envio de solicitud de transaccion
-$transactionRequest = new ClsPSETransactionRequest(<ClsPSETransactionRequest>);
+## Key features
+- Webcheckout
+- multi-store support,
+- Initial integration with Magento payment flow (transactions, refunds, etc.),
+- logging all APIs exceptions and errors,
+- test mode
 
-###createTransaction
-Crear transaccion
-$result = $placetopay->createTransaction($transactionRequest);
+## Configuration in PlacetpLatam panel
 
-###getTransactionInformation
-retorno de informacion de la transaccion
-$transactionInformation = $placetopay->getTransactionInformation($result->getTransactionID());
+"Return address" should be set to "yourdomain/placetopay/payment/end"
+
+"Report/Confirmation Address" should be set to "yourdomain/placetopay/payment/notify"
+
+
+## Configuration in Magento panel
+
+The configuration can be found in Stores > Configuration > Sales > Payment Methods > Imagina PlacetpLatam. It should be pretty straight-forward.
+
+## How to Install
+From the command line in magento root:
+```ssh
+composer require imagina/magento2-placetopay
+php bin/magento setup:upgrade
+php bin/magento setup:di:compile
+```
+
+More Information:  https://www.imaginacolombia.com

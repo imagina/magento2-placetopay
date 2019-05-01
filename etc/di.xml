@@ -1,0 +1,35 @@
+<?xml version="1.0"?>
+<!--
+/**
+ * @copyright Copyright (c) 2017 Imagina Colombia (https://www.imaginacolombia.com)
+ */
+-->
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:noNamespaceSchemaLocation="urn:magento:framework:ObjectManager/etc/config.xsd">
+    <type name="Imagina\Placetopay\Logger\Handler\Exception">
+        <arguments>
+            <argument name="filesystem" xsi:type="object">Magento\Framework\Filesystem\Driver\File</argument>
+        </arguments>
+    </type>
+    <type name="Imagina\Placetopay\Logger\Logger">
+        <arguments>
+            <argument name="name" xsi:type="string">placetopay</argument>
+            <argument name="handlers" xsi:type="array">
+                <item name="exception" xsi:type="object">Imagina\Placetopay\Logger\Handler\Exception</item>
+                <item name="error" xsi:type="object">Imagina\Placetopay\Logger\Handler\Error</item>
+            </argument>
+        </arguments>
+    </type>
+    <virtualType name="Imagina\Placetopay\Model\Session\Storage" type="Magento\Framework\Session\Storage">
+        <arguments>
+            <argument name="namespace" xsi:type="string">placetopay</argument>
+        </arguments>
+    </virtualType>
+    <type name="Imagina\Placetopay\Model\Session">
+        <arguments>
+            <argument name="storage" xsi:type="object">Imagina\Placetopay\Model\Session\Storage</argument>
+        </arguments>
+    </type>
+
+
+</config>

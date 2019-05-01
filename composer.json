@@ -1,33 +1,31 @@
 {
-  "name": "ymantillar/placetopay",
-  "description": "integracion plataforma de pagos placetopay",
-  "license": "MIT",
+  "name": "imagina/magento2-placetopay",
+  "description": "PlacetpLatam integration for Magento 2",
+  "require": {
+    "php": ">=7.0.0",
+    "magento/module-checkout": ">=100",
+    "magento/module-payment": ">=100",
+    "magento/module-sales": ">=100",
+    "magento/framework": ">=100"
+  },
+  "type": "magento2-module",
+  "version": "0.0.2",
+  "autoload": {
+    "files": [
+      "registration.php"
+    ],
+    "psr-4": {
+      "Imagina\\Placetopay\\": ""
+    }
+  },
   "authors": [
     {
-      "name": "yesid mantilla",
-      "email": "ymantillarueda@gmail.com"
+      "name": "Imagina Colombia",
+      "homepage": "http://www.imaginacolombia.com/"
     }
   ],
-  "minimum-stability": "dev",
-  "require": {
-    "php": ">=5.4.0",
-    "ext-soap": "*",
-    "ext-curl": "*",
-    "guzzlehttp/guzzle": "~5.0",
-    "magento/product-community-edition": ">=2.0.6"
-  },
-  "require-dev": {
-    "phpunit/phpunit": "5.5.*"
-  },
-  "autoload": {
-    "psr-4": {
-      "ymantillar\\PlaceToPay\\": "src/"
-    }
-  },
-  "autoload-dev": {
-    "psr-4": {
-      "ymantillar\\PlaceToPay\\tests\\": "tests/"
-    }
-  }
-
+  "license": [
+    "CC BY-SA 4.0",
+    "AFL-3.0"
+  ]
 }
