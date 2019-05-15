@@ -46,7 +46,7 @@ class Form extends \Magento\Framework\App\Action\Action
         if ($orderCreateData) {
             //Todo: Reactivate after testing
             //$this->session->setOrderCreateData(null);
-            $resultPage = $this->resultPageFactory->create(true, ['template' => 'Imagina_PlaceToPay::emptyroot.phtml']);
+            $resultPage = $this->resultPageFactory->create(true, ['template' => 'Imagina_Placetopay::emptyroot.phtml']);
             $resultPage->addHandle($resultPage->getDefaultLayoutHandle());
 
 

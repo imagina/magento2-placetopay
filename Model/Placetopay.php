@@ -12,9 +12,9 @@ class Placetopay  extends AbstractMethod
      */
     const XML_PATH_LOGIN               = 'payment/placetopay/login';
     const XML_PATH_SECRET_KEY           = 'payment/placetopay/secretKey';
-    //const XML_PATH_API_KEY              = 'payment/placetopay/ApiKey';
-    //const XML_PATH_API_LOGIN       = 'payment/placetopay/ApiLogin';
     const XML_PATH_TEST       = 'payment/placetopay/test';
+    const XML_PATH_MODE       = 'payment/placetopay/mode';
+
 
     protected $_isGateway = true;
     protected $_canCapture = true;
@@ -28,7 +28,7 @@ class Placetopay  extends AbstractMethod
     */
     protected $_code = self::CODE;
 
-    protected $_supportedCurrencyCodes = array('ARS','BRL','CLP','COP','MXN','PEN','USD');
+    protected $_supportedCurrencyCodes = array('COP','USD');
 
     /**
      * @var \Magento\Framework\UrlInterface

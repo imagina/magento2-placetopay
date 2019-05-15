@@ -18,7 +18,7 @@ define(
         return Component.extend({
             defaults: {
                 redirectAfterPlaceOrder: false,
-                template: 'Imagina_PlaceToPay/payment/placetopay'
+                template: 'Imagina_Placetopay/payment/placetopay'
             },
 
             getData: function() {
@@ -47,7 +47,7 @@ define(
                     this.isPlaceOrderActionAllowed(false);
                     placeOrder = placeOrderAction(this.getData(), this.redirectAfterPlaceOrder);
                     $.when(placeOrder).done(function () {
-                        $.mage.redirect(urlBuilder.build('/placetopay/payment/start'));
+                        $.mage.redirect(urlBuilder.build('placetopay/payment/start'));
                     }).fail(function(){
                         self.isPlaceOrderActionAllowed(true);
                     });

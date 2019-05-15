@@ -17,7 +17,7 @@ define(
         rendererList.push(
             {
                 type: 'placetopay',
-                component: 'Imagina_PlaceToPay/js/view/payment/method-renderer/placetopay-method'
+                component: 'Imagina_Placetopay/js/view/payment/method-renderer/placetopay-method'
             }
         );
         /** Add view logic here if needed */

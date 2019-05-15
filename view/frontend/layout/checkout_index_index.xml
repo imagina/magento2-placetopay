@@ -23,7 +23,7 @@
                                                             <item name="children" xsi:type="array">
                                                             <!-- merge payment method renders here -->
                                                                 <item name="placetopay-placetopay" xsi:type="array">
-                                                                    <item name="component" xsi:type="string">Imagina_PlaceToPay/js/view/payment/placetopay</item>
+                                                                    <item name="component" xsi:type="string">Imagina_Placetopay/js/view/payment/placetopay</item>
                                                                     <item name="methods" xsi:type="array">
 																		 <item name="placetopay" xsi:type="array">
                                                                             <item name="isBillingAddressRequired" xsi:type="boolean">true</item>

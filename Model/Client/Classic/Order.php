@@ -246,8 +246,8 @@ class Order implements \Imagina\Placetopay\Model\Client\OrderInterface
      */
     public function addSpecialDataToOrder(array $data = [])
     {
-        $data['merchantId'] = $this->dataGetter->getMerchantId();
-        $data['accountId'] = $this->dataGetter->getAccountId();
+        //$data['merchantId'] = $this->dataGetter->getMerchantId();
+        //$data['accountId'] = $this->dataGetter->getAccountId();
         $data['signature'] = $this->dataGetter->getSigForOrderCreate($data);
         return $data;
     }

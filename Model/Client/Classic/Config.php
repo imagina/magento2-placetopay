@@ -46,7 +46,7 @@ class Config implements ConfigInterface
     /**
      * @var string
      */
-    protected $test;
+    protected $mode;
 
     /**
      * @var string
@@ -68,45 +68,55 @@ class Config implements ConfigInterface
      */
     public function setConfig()
     {
-
-
-        $merchantId = $this->scopeConfig->getValue(Placetopay::XML_PATH_MERCHANT_ID, 'store');
-        if ($merchantId) {
-            $this->merchantId = $merchantId;
-        } else {
-            throw new LocalizedException(new Phrase('merchantId is empty.'));
-        }
-
-        $accountId = $this->scopeConfig->getValue(Placetopay::XML_PATH_ACCOUNT_ID, 'store');
-        if ($accountId) {
-            $this->accountId = $accountId;
-        } else {
-            throw new LocalizedException(new Phrase('accountId is empty.'));
-        }
-
-        $ApiKey = $this->scopeConfig->getValue(Placetopay::XML_PATH_API_KEY, 'store');
-        if ($ApiKey) {
-            $this->ApiKey = $ApiKey;
-        } else {
-            throw new LocalizedException(new Phrase('ApiKey is empty.'));
-        }
-
-        $ApiLogin = $this->scopeConfig->getValue(Placetopay::XML_PATH_API_LOGIN, 'store');
-        if ($ApiLogin) {
-            $this->ApiLogin = $ApiLogin;
-        } else {
-            throw new LocalizedException(new Phrase('ApiLogin is empty.'));
-        }
-
-
+        /*
         if ($this->scopeConfig->isSetFlag(Placetopay::XML_PATH_TEST, 'store')) {
             $this->test = 1;
-            $this->url = 'https://sandbox.gateway.placetopay.com/ppp-web-gateway/';
+            $this->url = 'https://test.placetopay.com/soap/pse/?wsdl'; // URL TESTING
         } else {
             $this->test = 0;
-            $this->url = 'https://gateway.placetopay.com/ppp-web-gateway/';
+            $this->url = 'https://test.placetopay.com/soap/pse/?wsdl'; // URL PRODUCTION
+        }
+        */
+        
+        $mode = $this->scopeConfig->getValue(Placetopay::XML_PATH_MODE, 'store');
+
+        if ($mode) {
+
+            if($mode=="development"){
+                $this->test = 0;
+                $this->url = 'https://dev.placetopay.com/redirection/';
+            }
+
+            if($mode=="testing"){
+                $this->test = 1;
+                $this->url = 'https://test.placetopay.com/redirection/';
+            }
+
+            if($mode=="production"){
+                $this->test = 2;
+                $this->url = 'https://secure.placetopay.com/redirection/';
+            }
+            
+        } else {
+           
+            $this->mode = "development";
+            $this->test = 0;
+            $this->url = 'https://dev.placetopay.com/redirection/';
         }
 
+        $login = $this->scopeConfig->getValue(Placetopay::XML_PATH_LOGIN, 'store');
+        if ($login) {
+            $this->login = $login;
+        } else {
+            throw new LocalizedException(new Phrase('login is empty.'));
+        }
+
+        $secretKey = $this->scopeConfig->getValue(Placetopay::XML_PATH_SECRET_KEY, 'store');
+        if ($secretKey) {
+            $this->secretKey = $secretKey;
+        } else {
+            throw new LocalizedException(new Phrase('secret key is empty.'));
+        }
 
         return true;
     }
@@ -119,9 +129,8 @@ class Config implements ConfigInterface
     {
         $config = [
             'login' => $this->login,
-            'seed' => $this->seed,
             'secretKey' => $this->secretKey,
-            'test' => $this->test,
+            'mode' => $this->mode,
             'url' => $this->url,
         ];
         if ($key) {

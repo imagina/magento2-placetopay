@@ -121,7 +121,7 @@ class DataGetter
     {
         //Signature Format
         //“ApiKey~merchantId~referenceCode~amount~currency”.
-
+        /*
         return md5(
             $this->configHelper->getConfig('ApiKey')."~".
             $data['merchantId'] ."~".
@@ -129,6 +129,9 @@ class DataGetter
             $data['amount']."~".
             $data['currency']
         );
+        */
+
+        return "123";
     }
 
     /**

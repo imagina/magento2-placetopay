@@ -8,7 +8,7 @@
         xsi:noNamespaceSchemaLocation="urn:magento:framework:App/etc/routes.xsd">
     <router id="standard">
         <route id="placetopay" frontName="placetopay">
-            <module name="Imagina_PlaceToPay" />
+            <module name="Imagina_Placetopay" />
         </route>
     </router>
 </config>

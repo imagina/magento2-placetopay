@@ -7,7 +7,7 @@
 <page xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" layout="empty" xsi:noNamespaceSchemaLocation="urn:magento:framework:View/Layout/etc/page_configuration.xsd">
     <body>
         <referenceContainer name="root">
-            <block class="Magento\Framework\View\Element\Template" name="placetopay.classic.form" template="Imagina_PlaceToPay::classic/form.phtml" cacheable="false"/>
+            <block class="Magento\Framework\View\Element\Template" name="placetopay.classic.form" template="Imagina_Placetopay::classic/form.phtml" cacheable="false"/>
         </referenceContainer>
     </body>
 </page>

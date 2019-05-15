@@ -5,22 +5,19 @@
 PlacetpLatam integration for Magento 2
 
 ## Key features
-- Webcheckout
+- Reedirection
 - multi-store support,
-- Initial integration with Magento payment flow (transactions, refunds, etc.),
 - logging all APIs exceptions and errors,
 - test mode
-
-## Configuration in PlacetpLatam panel
-
-"Return address" should be set to "yourdomain/placetopay/payment/end"
-
-"Report/Confirmation Address" should be set to "yourdomain/placetopay/payment/notify"
-
+- Available just for Colombia (For now)
 
 ## Configuration in Magento panel
 
 The configuration can be found in Stores > Configuration > Sales > Payment Methods > Imagina PlacetpLatam. It should be pretty straight-forward.
+
+    - Mode = "Development" for devs
+    - Login = Provided by PlaceToPay plataform
+    - Secret Key = Provided by PlaceToPay plataform
 
 ## How to Install
 From the command line in magento root:
@@ -29,5 +26,15 @@ composer require imagina/magento2-placetopay
 php bin/magento setup:upgrade
 php bin/magento setup:di:compile
 ```
+
+## Vendor
+
+Add to composer.json "dnetix/redirection": "dev-master" (Magento Root)
+
+"require": {
+    "dnetix/redirection": "dev-master",  
+},
+
+Execute: composer update
 
 More Information:  https://www.imaginacolombia.com
