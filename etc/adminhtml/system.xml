@@ -8,7 +8,7 @@
     <system>
         <section id="payment">
             <group id="placetopay" translate="label" type="text" sortOrder="200" showInDefault="1" showInWebsite="1" showInStore="1">
-                <label>Imagina | PlacetpLatam</label>
+                <label>Imagina | Placetopay</label>
 
                 <field id="active" translate="label" type="select" sortOrder="1" showInDefault="1" showInWebsite="1" showInStore="1">
                     <label>Enabled</label>
@@ -44,7 +44,7 @@
 
                 <field id="login" translate="label" type="text" sortOrder="10" showInDefault="1" showInWebsite="1" showInStore="1">
                     <label>Login</label>
-                    <comment>Copy from your configuration in PlacetpLatam panel</comment>
+                    <comment>Copy from your configuration in Placetopay panel</comment>
                     <depends>
                         <field id="active">1</field>
                     </depends>
@@ -52,7 +52,7 @@
 
                 <field id="secretKey" translate="label" type="text" sortOrder="10" showInDefault="1" showInWebsite="1" showInStore="1">
                     <label>Secret Key</label>
-                    <comment>Copy from your configuration in PlacetpLatam panel</comment>
+                    <comment>Copy from your configuration in Placetopay panel</comment>
                     <depends>
                         <field id="active">1</field>
                     </depends>

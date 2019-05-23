@@ -1,12 +1,12 @@
 {
   "name": "imagina/magento2-placetopay",
-  "description": "PlacetpLatam integration for Magento 2",
+  "description": "Placetopay integration for Magento 2",
   "require": {
     "php": ">=7.0.0",
     "dnetix/redirection": "^0.6.1"
   },
   "type": "magento2-module",
-  "version": "0.0.1",
+  "version": "1.0.0",
   "autoload": {
     "files": [
       "registration.php"

@@ -1,8 +1,8 @@
-# Imagina Magento 2 PlacetpLatam Module
+# Imagina Magento 2 [Placetopay](https://www.placetopay.com) Module
 
 *Read this in other languages: [Español](README.es.md),[English](README.md)
 
-PlacetpLatam integration for Magento 2
+[Placetopay](https://www.placetopay.com) integration for Magento 2
 
 ## Key features
 - Reedirection
@@ -13,7 +13,7 @@ PlacetpLatam integration for Magento 2
 
 ## Configuration in Magento panel
 
-The configuration can be found in Stores > Configuration > Sales > Payment Methods > Imagina PlacetpLatam. It should be pretty straight-forward.
+The configuration can be found in Stores > Configuration > Sales > Payment Methods > Imagina Placetopay. It should be pretty straight-forward.
 
     - Mode = "Development" for devs
     - Login = Provided by PlaceToPay plataform

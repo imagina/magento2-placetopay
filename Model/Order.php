@@ -187,8 +187,8 @@ class Order
      * Checks if first payment can be started.
      *
      * Order should belong to current logged in customer.
-     * Order should have PlacetpLatam payment method.
-     * Order should have no PlacetpLatam transactions.
+     * Order should have Placetopay payment method.
+     * Order should have no Placetopay transactions.
      * Order shouldn't be cancelled, closed or completed.
      *
      * @param \Magento\Sales\Model\Order $order

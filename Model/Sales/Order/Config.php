@@ -33,7 +33,7 @@ class Config extends \Magento\Sales\Model\Order\Config
     }
 
     /**
-     * Gets PlacetpLatam-specific default status for state.
+     * Gets Placetopay-specific default status for state.
      *
      * @param string $state
      * @return string
