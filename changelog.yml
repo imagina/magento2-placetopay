@@ -1,0 +1,5 @@
+url: https://github.com/magento2-placetopay
+versions:
+  "0.0.2":
+    changed:
+      - Response to other status

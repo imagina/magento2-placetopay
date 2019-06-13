@@ -3,6 +3,7 @@
 namespace Imagina\Placetopay\Controller\Payment;
 
 use Magento\Framework\Exception\LocalizedException;
+use Magento\Framework\Phrase;
 
 class Start extends \Magento\Framework\App\Action\Action
 {
@@ -117,7 +118,8 @@ class Start extends \Magento\Framework\App\Action\Action
         
         /** Prepare the request */
         $returnUrl = $this->_url->getUrl('placetopay/payment/response/',array('id'=>$orderId));
-        $cancelUrl = $this->_url->getUrl('/');
+        //$cancelUrl = $this->_url->getUrl('/');
+        $cancelUrl = $this->_url->getUrl('placetopay/payment/response/',array('id'=>$orderId));
         $description = "Order #".$orderId." - ".$order->getCustomerEmail();
             
         $request = [
@@ -143,8 +145,8 @@ class Start extends \Magento\Framework\App\Action\Action
 
             $requestId = $response->requestId();
 
-            $status = \Magento\Sales\Model\Order::STATE_PENDING_PAYMENT;
-            $order->setStatus($status);
+            //$status = \Magento\Sales\Model\Order::STATE_PENDING_PAYMENT;
+            //$order->setStatus($status);
 
             $order->setRequestId($requestId);
             $order->save();
@@ -155,8 +157,9 @@ class Start extends \Magento\Framework\App\Action\Action
         }else{
 
             throw new LocalizedException(new Phrase($response->status()->message()));
-            //$response->status()->message();
+            $this->logger->critical($response->status()->message());
             //print_r($response->status()->message() . "\n");
+            //exit();
         }
 
         

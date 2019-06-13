@@ -45,8 +45,8 @@ class Response extends Action
             $orderId = $request->getParam('id');
             //$orderId = $this->session->getLastOrderId();
             
-            //$orderId = 999999; //Testing
-           
+            //$orderId = 54; //==============Testing***
+        
             $this->logger->info("Response OrderID: ".$orderId);
 
             $order = $this->orderHelper->loadOrderById($orderId);
@@ -58,9 +58,9 @@ class Response extends Action
             //$requestId = $this->session->getRequestId();
             $requestId = $order->getData('request_id');
 
-            //$requestId = 99999; //Testing
-           
-            $this->getPlacetopayTransaction($orderId,$order,$config,$requestId,$clientOrderHelper);
+            //$requestId = 18598; //==============Testing***
+        
+            $statusCode = $this->getPlacetopayTransaction($orderId,$order,$config,$requestId,$clientOrderHelper);
 
             $redirectUrl = 'checkout/onepage/success';
 
@@ -70,6 +70,35 @@ class Response extends Action
             $redirectParams = ['exception' => '1'];
         }
         
+        //print_r("Fin testing"); //==============Testing***
+        //exit();
+
+        if(isset($statusCode)){
+
+            if($statusCode==0){
+                $redirectUrl = 'checkout/onepage/success';
+            }else{
+                $redirectUrl = 'checkout/onepage/failure';
+                if($statusCode==1){
+                    $msj = "Status de la transaccion: Rechazada";
+                    $this->messageManager->addError(__($msj)); 
+                }
+                if($statusCode==2){
+                    $msj = "Status de la transaccion: Pendiente";
+                    $this->messageManager->addWarning(__($msj));
+                }
+                if($statusCode==3){
+                    $msj = "Status de la transaccion: Fallida";
+                    $this->messageManager->addError(__($msj));
+                }
+                if($statusCode==4){
+                    $msj = "Status de la transaccion: Error";
+                    $this->messageManager->addError(__($msj));
+                }
+            } 
+           
+        }// End Status code
+       
         $resultRedirect->setPath($redirectUrl);
         return $resultRedirect;
 
@@ -94,10 +123,12 @@ class Response extends Action
         
         /** Check the Response */
         if ($response->isSuccessful()) {
-           
-            if ($response->status()->isApproved()) {
 
+            //echo "<pre>";print_r($response);die("dead");//==============Testing***
+          
+            if ($response->status()->isApproved()) {
                 $statusPTP = "APPROVED";
+                $statusCode = 0;
                 $status = \Magento\Sales\Model\Order::STATE_PROCESSING;
 
                 /*
@@ -105,21 +136,34 @@ class Response extends Action
                     
                 }
                 */
-
             }else{
 
                 if ($response->status()->isRejected()) {
-
                     $statusPTP = "REJECTED";
-                    $status = \Magento\Sales\Model\Order::STATE_PROCESSING;
-
-                } else{
-
+                    $statusCode = 1;
+                    $status = \Magento\Sales\Model\Order::STATE_CANCELED;
+                }else{
                     $statusPTP = "PENDING";
-                    $status = \Magento\Sales\Model\Order::STATE_PROCESSING;
-                   
+                    $statusCode = 2;
+                    $status = \Magento\Sales\Model\Order::STATE_PENDING_PAYMENT;
                 }
+
             }
+
+            /*
+            if ($response->status()->isPending()) {
+                $statusPTP = "PENDING";
+                $statusCode = 2;
+                $status = \Magento\Sales\Model\Order::STATE_PENDING;
+            }
+            */
+            /*
+            if ($response->status()->isFailed()) {
+                $statusPTP = "FAILED";
+                $statusCode = 3;
+                $status = \Magento\Sales\Model\Order::STATE_CANCELED;
+            }
+            */
 
             $order->setStatus($status);
             $order->setState($status);
@@ -134,8 +178,9 @@ class Response extends Action
 
         } else {
             
-            $statusPTP = "ERROR";
-            $status = \Magento\Sales\Model\Order::STATE_PENDING_PAYMENT;
+            $statusPTP = "FALLIDA";
+            $statusCode = 3;
+            $status = \Magento\Sales\Model\Order::STATE_CANCELED;
 
             $order->setStatus($status);
             $order->setState($status);
@@ -146,6 +191,8 @@ class Response extends Action
             throw new LocalizedException(new Phrase($response->status()->message()));
 
         }
+
+        return $statusCode;
        
 
     }// End Function
