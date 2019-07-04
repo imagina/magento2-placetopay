@@ -1,5 +1,14 @@
 url: https://github.com/magento2-placetopay
 versions:
+   "0.0.4":
+    Added:
+      - Email, phone field to backend
+    Changed:
+      - MSG edo pendiente
+      - Fixes status response
+    Removed:
+      - Deleted comments
+    
   "0.0.3":
     Removed:
       - Vendor from composer

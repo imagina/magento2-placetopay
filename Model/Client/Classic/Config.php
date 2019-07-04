@@ -36,6 +36,16 @@ class Config implements ConfigInterface
     /**
      * @var string
      */
+    protected $email;
+
+     /**
+     * @var string
+     */
+    protected $phone;
+
+    /**
+     * @var string
+     */
     protected $nonce;
 
     /**
@@ -118,6 +128,20 @@ class Config implements ConfigInterface
             throw new LocalizedException(new Phrase('secret key is empty.'));
         }
 
+        $email = $this->scopeConfig->getValue(Placetopay::XML_PATH_EMAIL, 'store');
+        if ($email) {
+            $this->email = $email;
+        } else {
+            $this->email = "email@email.com";
+        }
+
+        $phone = $this->scopeConfig->getValue(Placetopay::XML_PATH_PHONE, 'store');
+        if ($phone) {
+            $this->phone = $phone;
+        } else {
+            $this->phone = "3XXXXXXX";
+        }
+
         return true;
     }
 
@@ -132,6 +156,8 @@ class Config implements ConfigInterface
             'secretKey' => $this->secretKey,
             'mode' => $this->mode,
             'url' => $this->url,
+            'email' => $this->email,
+            'phone' => $this->phone
         ];
         if ($key) {
             return $config[$key];

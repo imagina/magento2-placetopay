@@ -14,6 +14,8 @@ class Placetopay  extends AbstractMethod
     const XML_PATH_SECRET_KEY           = 'payment/placetopay/secretKey';
     const XML_PATH_TEST       = 'payment/placetopay/test';
     const XML_PATH_MODE       = 'payment/placetopay/mode';
+    const XML_PATH_EMAIL       = 'payment/placetopay/email';
+    const XML_PATH_PHONE       = 'payment/placetopay/phone';
 
 
     protected $_isGateway = true;

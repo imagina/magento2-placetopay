@@ -80,19 +80,24 @@ class Response extends Action
             }else{
                 $redirectUrl = 'checkout/onepage/failure';
                 if($statusCode==1){
-                    $msj = "Status de la transaccion: Rechazada";
+                    $msj = "Estado de la transaccion: Rechazada";
                     $this->messageManager->addError(__($msj)); 
                 }
                 if($statusCode==2){
-                    $msj = "Status de la transaccion: Pendiente";
+
+                    $msj = "En este momento su pedido presenta un proceso de pago cuya transacción se encuentra en estado PENDIENTE, 
+                    en caso de recibir confirmación por la entidad financiera, por favor espere unos minutos y vuelva a consultar 
+                    para verificar que su pago haya sido confirmado correctamente. Si desea mucha mas información comunicarse al 
+                    numero ".$config->getConfig('phone')." , o enviar un correo electrónico a ".$config->getConfig('email');
+
                     $this->messageManager->addWarning(__($msj));
                 }
                 if($statusCode==3){
-                    $msj = "Status de la transaccion: Fallida";
+                    $msj = "Estado de la transaccion: Fallida";
                     $this->messageManager->addError(__($msj));
                 }
                 if($statusCode==4){
-                    $msj = "Status de la transaccion: Error";
+                    $msj = "Estado de la transaccion: Error";
                     $this->messageManager->addError(__($msj));
                 }
             } 
@@ -124,18 +129,13 @@ class Response extends Action
         /** Check the Response */
         if ($response->isSuccessful()) {
 
-            //echo "<pre>";print_r($response);die("dead");//==============Testing***
+            //echo "<pre>";print_r($response->status());die("dead");//==============Testing***
           
             if ($response->status()->isApproved()) {
                 $statusPTP = "APPROVED";
                 $statusCode = 0;
                 $status = \Magento\Sales\Model\Order::STATE_PROCESSING;
 
-                /*
-                if ($client->canProcessNotification($orderId)) {
-                    
-                }
-                */
             }else{
 
                 if ($response->status()->isRejected()) {
@@ -143,27 +143,18 @@ class Response extends Action
                     $statusCode = 1;
                     $status = \Magento\Sales\Model\Order::STATE_CANCELED;
                 }else{
-                    $statusPTP = "PENDING";
-                    $statusCode = 2;
-                    $status = \Magento\Sales\Model\Order::STATE_PENDING_PAYMENT;
+                    if($response->status()->status()=="PENDING"){
+                        $statusPTP = "PENDING";
+                        $statusCode = 2;
+                        $status = \Magento\Sales\Model\Order::STATE_PENDING_PAYMENT;
+                    }else{
+                        $statusPTP = "FAILED";
+                        $statusCode = 3;
+                        $status = \Magento\Sales\Model\Order::STATE_CANCELED;
+                    }
                 }
 
             }
-
-            /*
-            if ($response->status()->isPending()) {
-                $statusPTP = "PENDING";
-                $statusCode = 2;
-                $status = \Magento\Sales\Model\Order::STATE_PENDING;
-            }
-            */
-            /*
-            if ($response->status()->isFailed()) {
-                $statusPTP = "FAILED";
-                $statusCode = 3;
-                $status = \Magento\Sales\Model\Order::STATE_CANCELED;
-            }
-            */
 
             $order->setStatus($status);
             $order->setState($status);
