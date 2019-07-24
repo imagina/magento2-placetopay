@@ -1,5 +1,9 @@
 url: https://github.com/magento2-placetopay
 versions:
+   "0.0.5":
+    Changed:
+      - Change orderID for incrementID to send to PlacetoPay
+      
    "0.0.4":
     Added:
       - Email, phone field to backend

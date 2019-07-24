@@ -120,11 +120,14 @@ class Start extends \Magento\Framework\App\Action\Action
         $returnUrl = $this->_url->getUrl('placetopay/payment/response/',array('id'=>$orderId));
         //$cancelUrl = $this->_url->getUrl('/');
         $cancelUrl = $this->_url->getUrl('placetopay/payment/response/',array('id'=>$orderId));
-        $description = "Order #".$orderId." - ".$order->getCustomerEmail();
+        
+        $incrementId = $order->getIncrementId();
+
+        $description = "Order #".$incrementId." - ".$order->getCustomerEmail();
             
         $request = [
             'payment' => [
-                'reference' => $orderId,
+                'reference' => $incrementId,
                 'description' => $description,
                 'amount' => [
                     'currency' => $order->getOrderCurrencyCode(),
